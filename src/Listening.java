@@ -63,7 +63,6 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_W) {
 			up = true;
 		}
@@ -77,10 +76,8 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 			right = true;
 		}
 	}
-
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_W) {
 			up = false;
 		}

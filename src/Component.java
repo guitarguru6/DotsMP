@@ -22,11 +22,10 @@ public class Component extends Applet implements Runnable {
 	public static void main(String[] args) {
 		Component component = new Component();
 
-		w = new Window(WIDTH, HEIGHT, "DotsMP Pre-alpha v0.0.1");
+		w = new Window(WIDTH, HEIGHT, "DotsMP Pre-alpha v0.0.3");
 		w.add(component);
 
 		component.init();
-
 	}
 	
 	public void init() {
@@ -36,6 +35,7 @@ public class Component extends Applet implements Runnable {
 		addMouseListener(listening);
 		addMouseMotionListener(listening);
 		
+		// Change the cursor to a set of crosshairs
 		setCursor(new Cursor(1));
 		
 		// Start Thread
@@ -76,13 +76,8 @@ public class Component extends Applet implements Runnable {
 			}
 		}
 		
-		// 
+		// draws dead zone
 		listening.render(g);
-		
-		// Draw white crosshair at mouse location
-		//g.setColor(Color.WHITE);
-		//g.drawLine(listening.x-5, listening.y, listening.x+5, listening.y);
-		//g.drawLine(listening.x, listening.y-5, listening.x, listening.y+5);
 		
 		// Actually draws to the screen
 		g = getGraphics();
