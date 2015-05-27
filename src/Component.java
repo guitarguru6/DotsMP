@@ -1,5 +1,6 @@
 import java.applet.Applet;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -7,8 +8,8 @@ import java.awt.Image;
 public class Component extends Applet implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
-	private static final int WIDTH = 800;
-	private static final int HEIGHT = 600;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
 
 	private static boolean isRunning = false;
 
@@ -35,6 +36,8 @@ public class Component extends Applet implements Runnable {
 		addMouseListener(listening);
 		addMouseMotionListener(listening);
 		
+		setCursor(new Cursor(1));
+		
 		// Start Thread
 		isRunning = true;
 		new Thread(this).start();
@@ -54,7 +57,7 @@ public class Component extends Applet implements Runnable {
 	}
 	
 	public void tick() {
-		
+		listening.tick();
 	}
 	
 	public void render(Graphics g) {
@@ -67,16 +70,19 @@ public class Component extends Applet implements Runnable {
 		
 		// Draw gray grid in background *temporary*
 		g.setColor(Color.GRAY);
-		for(int x = 0; x < WIDTH / 10 + 1; x++) {
-			for(int y = 0; y < HEIGHT / 10 + 1; y++) {
-				g.drawRect(x*10, y*10, 10, 10);
+		for(int x = -1; x < WIDTH / 10 + 1; x++) {
+			for(int y = -1; y < HEIGHT / 10 + 1; y++) {
+				g.drawRect(x*10-(int)Listening.xOff%10, y*10-(int)Listening.yOff%10, 10, 10);
 			}
 		}
 		
+		// 
+		listening.render(g);
+		
 		// Draw white crosshair at mouse location
-		g.setColor(Color.WHITE);
-		g.drawLine(listening.x-5, listening.y, listening.x+5, listening.y);
-		g.drawLine(listening.x, listening.y-5, listening.x, listening.y+5);
+		//g.setColor(Color.WHITE);
+		//g.drawLine(listening.x-5, listening.y, listening.x+5, listening.y);
+		//g.drawLine(listening.x, listening.y-5, listening.x, listening.y+5);
 		
 		// Actually draws to the screen
 		g = getGraphics();
