@@ -34,7 +34,7 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -52,7 +52,6 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
