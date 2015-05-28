@@ -9,7 +9,6 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 	
 	public static int x, y;
 	public static double xOff = 0, yOff = 0;
-	public static boolean up = false, down = false, left = false, right = false;
 	private static DeadZone dz;
 
 	public Listening() {
@@ -63,33 +62,11 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_W) {
-			up = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_A) {
-			left = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_S) {
-			down = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_D) {
-			right = true;
-		}
+		
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_W) {
-			up = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_A) {
-			left = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_S) {
-			down = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_D) {
-			right = false;
-		}
+		
 	}
 
 	@Override
@@ -100,20 +77,20 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 
 	public void tick() {
 		dz.green();
-		if (up || y < dz.y) {
-			yOff -= 1;
+		if (y < dz.y) {
+			yOff -= 2;
 			dz.red();
 		}
-		if (down || y > dz.y + dz.height) {
-			yOff += 1;
+		if (y > dz.y + dz.height) {
+			yOff += 2;
 			dz.red();
 		}
-		if (left || x < dz.x) {
-			xOff -= 1;
+		if (x < dz.x) {
+			xOff -= 2;
 			dz.red();
 		}
-		if (right || x > dz.x + dz.width) {
-			xOff += 1;
+		if (x > dz.x + dz.width) {
+			xOff += 2;
 			dz.red();
 		}
 	}
