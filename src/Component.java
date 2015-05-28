@@ -17,6 +17,8 @@ public class Component extends Applet implements Runnable {
 	private static Image screen;
 
 	private static Listening listening;
+	
+	private Player player;
 
 	public static Window w;
 
@@ -35,8 +37,8 @@ public class Component extends Applet implements Runnable {
 		addKeyListener(listening);
 		addMouseListener(listening);
 		addMouseMotionListener(listening);
-
-		level = createVolatileImage(WIDTH, HEIGHT);
+		
+		player = new Player(400, 300, 10);
 
 		// Change the cursor to a set of crosshairs
 		setCursor(new Cursor(1));
@@ -50,7 +52,6 @@ public class Component extends Applet implements Runnable {
 		while (isRunning) {
 			tick();
 			render(g);
-
 			try {
 				Thread.sleep(20);
 			} catch (InterruptedException e) {
@@ -62,6 +63,7 @@ public class Component extends Applet implements Runnable {
 
 	public void tick() {
 		listening.tick();
+		player.tick();
 	}
 
 	public void renderLevel(Graphics g) {
@@ -75,6 +77,8 @@ public class Component extends Applet implements Runnable {
 		g.setColor(Color.RED);
 		g.drawRect(1, 1, level.getWidth(null)-2, level.getHeight(null)-2);
 		g.fillRect(100, 100, 200, 200);
+		
+		player.render(g);
 	}
 
 	public void render(Graphics g) {
@@ -97,7 +101,7 @@ public class Component extends Applet implements Runnable {
 
 		// Show position
 		g.setColor(Color.GREEN);
-		g.drawString(Listening.xOff + ", " + Listening.yOff, 30, 30);
+		g.drawString((Listening.xOff + 800) + ", " + (Listening.yOff + 600), 30, 30);
 
 		// Actually draws to the screen
 		g = getGraphics();
