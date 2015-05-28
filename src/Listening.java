@@ -11,7 +11,7 @@ public class Listening implements MouseListener, MouseMotionListener, MouseWheel
 
 	public static int x, y;
 	public static double xOff = 0, yOff = 0;
-	private static int minX = -800, minY = -600, maxX = 1600, maxY = 1200;
+	public static int minX = -400, minY = -300, maxX = 1200, maxY = 900;
 	private static DeadZone dz;
 
 	public Listening() {
@@ -81,33 +81,36 @@ public class Listening implements MouseListener, MouseMotionListener, MouseWheel
 	public void tick() {
 		dz.green();
 		if (y < dz.y) {
-			yOff -= 2;
+			Player.y -= 5;
 			dz.red();
 		}
 		if (y > dz.y + dz.height) {
-			yOff += 2;
+			Player.y += 5;
 			dz.red();
 		}
 		if (x < dz.x) {
-			xOff -= 2;
+			Player.x -= 5;
 			dz.red();
 		}
 		if (x > dz.x + dz.width) {
-			xOff += 2;
+			Player.x += 5;
 			dz.red();
 		}
+		
+		xOff = Player.x - 800;
+		yOff = Player.y - 600;
 
-		if (xOff < minX + Player.radius) {
-			xOff = minX + Player.radius;
+		if (xOff < minX) {
+			xOff = minX;
 		}
-		if (yOff < minY + Player.radius) {
-			yOff = minY + Player.radius;
+		if (yOff < minY) {
+			yOff = minY;
 		}
-		if (xOff > maxX - Player.radius) {
-			xOff = maxX - Player.radius;
+		if (xOff > maxX) {
+			xOff = maxX;
 		}
-		if (yOff > maxY - Player.radius) {
-			yOff = maxY - Player.radius;
+		if (yOff > maxY) {
+			yOff = maxY;
 		}
 	}
 

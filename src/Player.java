@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Player {
 	public static double x, y, diameter, radius;
+	public static int minX = 0, minY = 0, maxX = 2400, maxY = 1800;
 	private static Color color;
 	private static Color[] colors;
 
@@ -33,8 +34,18 @@ public class Player {
 	}
 	
 	public void tick() {
-		x = Listening.xOff+800;
-		y = Listening.yOff+600;
+		if (x < minX + radius) {
+			x = minX + radius;
+		}
+		if (y < minY + radius) {
+			y = minY + radius;
+		}
+		if (x > maxX - radius) {
+			x = maxX - radius;
+		}
+		if (y > maxY - radius) {
+			y = maxY - radius;
+		}
 	}
 	
 	public void render(Graphics g) {

@@ -76,7 +76,7 @@ public class Component extends Applet implements Runnable {
 		g.fillRect((int) Listening.xOff + 400, (int) Listening.yOff + 300, WIDTH, HEIGHT);
 
 		g.setColor(Color.RED);
-		g.drawRect(1, 1, level.getWidth(null)-2, level.getHeight(null)-2);
+		g.drawRect(1, 1, level.getWidth(null)-2, level.getHeight(null)-3);
 		g.fillRect(100, 100, 200, 200);
 		
 		player.render(g);
@@ -102,7 +102,7 @@ public class Component extends Applet implements Runnable {
 
 		// Show position
 		g.setColor(Color.GREEN);
-		g.drawString((Listening.xOff + 800) + ", " + (Listening.yOff + 600), 30, 30);
+		g.drawString((Player.x) + ", " + (player.y), 30, 30);
 
 		// Actually draws to the screen
 		g = getGraphics();
