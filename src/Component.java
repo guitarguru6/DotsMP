@@ -37,6 +37,7 @@ public class Component extends Applet implements Runnable {
 		addKeyListener(listening);
 		addMouseListener(listening);
 		addMouseMotionListener(listening);
+		addMouseWheelListener(listening);
 		
 		player = new Player(400, 300, 10);
 

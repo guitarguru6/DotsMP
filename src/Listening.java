@@ -4,8 +4,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
-public class Listening implements MouseListener, MouseMotionListener, KeyListener {
+public class Listening implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 
 	public static int x, y;
 	public static double xOff = 0, yOff = 0;
@@ -111,5 +113,15 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 
 	public void render(Graphics g) {
 		dz.render(g);
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getWheelRotation() < 0) {
+			Player.increaseD();
+		} else if (e.getWheelRotation() > 0) {
+			Player.decreaseD();
+		}
 	}
 }

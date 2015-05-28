@@ -14,12 +14,20 @@ public class Player {
 		setColor();
 	}
 	
+	public static void increaseD() {
+		setDiameter(diameter + 1);
+	}
+	
+	public static void decreaseD() {
+		setDiameter(diameter - 1);
+	}
+	
 	public static void setColor() {
 		colors = new Color[]{Color.GREEN, Color.BLUE, Color.CYAN, Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.YELLOW};
 		color = colors[new Random().nextInt(colors.length)];
 	}
 
-	public void setDiameter(Double d) {
+	public static void setDiameter(Double d) {
 		diameter = d;
 		radius = d / 2.0;
 	}
