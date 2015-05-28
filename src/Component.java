@@ -2,7 +2,12 @@ import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class Component extends Applet implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +27,7 @@ public class Component extends Applet implements Runnable {
 
 	public static void main(String[] args) {
 		Component component = new Component();
-		
+
 		w = new Window(WIDTH, HEIGHT, "DotsMP Pre-alpha v0.0.3");
 		w.add(component);
 
@@ -50,6 +55,7 @@ public class Component extends Applet implements Runnable {
 		while (isRunning) {
 			tick();
 			render(g);
+
 			try {
 				Thread.sleep(20);
 			} catch (InterruptedException e) {
@@ -72,7 +78,7 @@ public class Component extends Applet implements Runnable {
 		g.fillRect((int) Listening.xOff + 400, (int) Listening.yOff + 300, WIDTH, HEIGHT);
 
 		g.setColor(Color.RED);
-		g.drawRect(1, 1, level.getWidth(null), level.getHeight(null));
+		g.drawRect(1, 1, level.getWidth(null)-2, level.getHeight(null)-2);
 		g.fillRect(100, 100, 200, 200);
 	}
 
@@ -81,6 +87,10 @@ public class Component extends Applet implements Runnable {
 
 		screen = createImage(WIDTH, HEIGHT);
 		g = screen.getGraphics();
+
+		// Draw black Background
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		g.drawImage(level, (int) -Listening.xOff - 400, (int) -Listening.yOff - 300, null);
 
@@ -91,7 +101,7 @@ public class Component extends Applet implements Runnable {
 		listening.render(g);
 
 		// Show position
-		g.setColor(Color.WHITE);
+		g.setColor(Color.GREEN);
 		g.drawString(Listening.xOff + ", " + Listening.yOff, 30, 30);
 
 		// Actually draws to the screen

@@ -9,6 +9,7 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 	
 	public static int x, y;
 	public static double xOff = 0, yOff = 0;
+	private static int minX = -800, minY = -600, maxX = 1600, maxY = 1200;
 	private static DeadZone dz;
 
 	public Listening() {
@@ -92,6 +93,19 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 		if (x > dz.x + dz.width) {
 			xOff += 2;
 			dz.red();
+		}
+		
+		if(xOff < minX) {
+			xOff = minX;
+		}
+		if(yOff < minY) {
+			yOff = minY;
+		}
+		if(xOff > maxX) {
+			xOff = maxX;
+		}
+		if(yOff > maxY) {
+			yOff = maxY;
 		}
 	}
 
