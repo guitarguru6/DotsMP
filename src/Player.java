@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Player {
-	public double x, y, diameter, radius;
+	public static double x, y, diameter, radius;
 
 	public Player(int x, int y, int diameter) {
 		this.x = x;

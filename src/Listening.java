@@ -6,7 +6,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class Listening implements MouseListener, MouseMotionListener, KeyListener {
-	
+
 	public static int x, y;
 	public static double xOff = 0, yOff = 0;
 	private static int minX = -800, minY = -600, maxX = 1600, maxY = 1200;
@@ -63,11 +63,12 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 	}
+
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
+
 	}
 
 	@Override
@@ -94,18 +95,18 @@ public class Listening implements MouseListener, MouseMotionListener, KeyListene
 			xOff += 2;
 			dz.red();
 		}
-		
-		if(xOff < minX) {
-			xOff = minX;
+
+		if (xOff < minX + Player.radius) {
+			xOff = minX + Player.radius;
 		}
-		if(yOff < minY) {
-			yOff = minY;
+		if (yOff < minY + Player.radius) {
+			yOff = minY + Player.radius;
 		}
-		if(xOff > maxX) {
-			xOff = maxX;
+		if (xOff > maxX - Player.radius) {
+			xOff = maxX - Player.radius;
 		}
-		if(yOff > maxY) {
-			yOff = maxY;
+		if (yOff > maxY - Player.radius) {
+			yOff = maxY - Player.radius;
 		}
 	}
 
