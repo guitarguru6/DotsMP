@@ -2,12 +2,7 @@ import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 
 public class Component extends Applet implements Runnable {
 	private static final long serialVersionUID = 1L;
