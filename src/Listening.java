@@ -81,19 +81,19 @@ public class Listening implements MouseListener, MouseMotionListener, MouseWheel
 	public void tick() {
 		dz.green();
 		if (y < dz.y) {
-			Player.y -= 5;
+			Player.y -= Player.getSpeed();
 			dz.red();
 		}
 		if (y > dz.y + dz.height) {
-			Player.y += 5;
+			Player.y += Player.getSpeed();
 			dz.red();
 		}
 		if (x < dz.x) {
-			Player.x -= 5;
+			Player.x -= Player.getSpeed();
 			dz.red();
 		}
 		if (x > dz.x + dz.width) {
-			Player.x += 5;
+			Player.x += Player.getSpeed();
 			dz.red();
 		}
 		

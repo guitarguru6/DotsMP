@@ -5,6 +5,7 @@ import java.util.Random;
 public class Player {
 	public static double x, y, diameter, radius;
 	public static int minX = 0, minY = 0, maxX = 2400, maxY = 1800;
+	private static double speedBase = 50;
 	private static double minSize = 10.0;
 	private static Color color;
 	private static Color[] colors;
@@ -14,6 +15,10 @@ public class Player {
 		Player.y = y;
 		setDiameter((double) diameter);
 		setColor();
+	}
+	
+	public static double getSpeed() {
+		return speedBase/diameter;
 	}
 
 	public static void increaseD() {

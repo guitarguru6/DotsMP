@@ -56,7 +56,7 @@ public class Component extends Applet implements Runnable {
 			tick();
 			render(g);
 			try {
-				Thread.sleep(20);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -105,7 +105,7 @@ public class Component extends Applet implements Runnable {
 
 		// Show position
 		g.setColor(Color.GREEN);
-		g.drawString((Player.x) + ", " + (player.y), 30, 30);
+		g.drawString((int)(Player.x) + ", " + (int)(player.y), 30, 30);
 
 		// Actually draws to the screen
 		g = getGraphics();
