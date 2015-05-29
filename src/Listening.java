@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -9,21 +8,20 @@ import java.awt.event.MouseWheelListener;
 
 public class Listening implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 
+	// the location of the cursor in the window
 	public static int x, y;
+	// the camera offset
 	public static double xOff = 0, yOff = 0;
+	// the boundaries the camera shouldn't cross
 	public static int minX = -400, minY = -300, maxX = 1200, maxY = 900;
-	private static DeadZone dz;
-
-	public Listening() {
-		super();
-		dz = new DeadZone();
-	}
 
 	public static void updateLocation(MouseEvent e) {
+		// updates the location of the mouse
 		x = e.getX();
 		y = e.getY();
 	}
 
+	@Override
 	public void mouseDragged(MouseEvent e) {
 		updateLocation(e);
 	}
@@ -36,19 +34,16 @@ public class Listening implements MouseListener, MouseMotionListener, MouseWheel
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -59,70 +54,44 @@ public class Listening implements MouseListener, MouseMotionListener, MouseWheel
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void tick() {
-		dz.green();
-		if (y < dz.y) {
-			Player.y -= Player.getSpeed();
-			dz.red();
-		}
-		if (y > dz.y + dz.height) {
-			Player.y += Player.getSpeed();
-			dz.red();
-		}
-		if (x < dz.x) {
-			Player.x -= Player.getSpeed();
-			dz.red();
-		}
-		if (x > dz.x + dz.width) {
-			Player.x += Player.getSpeed();
-			dz.red();
-		}
-		
+		// sets the camera position relative to the position of the player
 		xOff = Player.x - 800;
 		yOff = Player.y - 600;
 
-		if (xOff < minX) {
+		// checks that the camera isn't out of bounds and corrects if it is
+		if (xOff < minX)
 			xOff = minX;
-		}
-		if (yOff < minY) {
+		if (yOff < minY)
 			yOff = minY;
-		}
-		if (xOff > maxX) {
+		if (xOff > maxX)
 			xOff = maxX;
-		}
-		if (yOff > maxY) {
+		if (yOff > maxY)
 			yOff = maxY;
-		}
-		dz.tick();
-	}
-
-	public void render(Graphics g) {
-		dz.render(g);
 	}
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getWheelRotation() < 0) {
+		// if scrolled up increase player size, if scrolled down decrease it.
+		// (for debugging purposes)
+		if (e.getWheelRotation() < 0) {
 			Player.increaseD();
 		} else if (e.getWheelRotation() > 0) {
 			Player.decreaseD();

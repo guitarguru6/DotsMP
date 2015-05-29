@@ -10,6 +10,5 @@ public class Window extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-
 	}
 }

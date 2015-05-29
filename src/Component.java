@@ -7,8 +7,10 @@ import java.awt.Image;
 public class Component extends Applet implements Runnable {
 	private static final long serialVersionUID = 1L;
 
+	// width and height of the frame
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
+	// width and height of the level
 	public static final int LEVEL_WIDTH = WIDTH * 3;
 	public static final int LEVEL_HEIGHT = HEIGHT * 3;
 
@@ -18,6 +20,7 @@ public class Component extends Applet implements Runnable {
 	private static Image level;
 	private static Image screen;
 
+	// class that handles user input
 	private static Listening listening;
 
 	private Player player;
@@ -27,31 +30,34 @@ public class Component extends Applet implements Runnable {
 	public static void main(String[] args) {
 		Component component = new Component();
 
-		w = new Window(WIDTH, HEIGHT, "DotsMP Pre-alpha v0.1.5");
+		w = new Window(WIDTH, HEIGHT, "DotsMP Pre-alpha v0.2");
 		w.add(component);
 
 		component.init();
 	}
 
 	public void init() {
-		// Instantiate Listener
+		// instantiate the listener
 		listening = new Listening();
 		addKeyListener(listening);
 		addMouseListener(listening);
 		addMouseMotionListener(listening);
 		addMouseWheelListener(listening);
 
-		player = new Player(400, 300, 10, "Player #1");
+		// create the player
+		player = new Player(400, 300, 20, "Player #1");
 
-		// Change the cursor to a set of crosshairs
+		// change the cursor to a set of crosshairs
 		setCursor(new Cursor(1));
 
-		// Start Thread
+		// start the game thread
 		isRunning = true;
 		new Thread(this).start();
 	}
 
 	public void run() {
+		// while running: tick, render, then attempt to sleep the thread for 10
+		// milliseconds
 		while (isRunning) {
 			tick();
 			render(g);
@@ -67,47 +73,44 @@ public class Component extends Applet implements Runnable {
 	public void tick() {
 		listening.tick();
 		player.tick();
-
 	}
 
 	public void renderLevel(Graphics g) {
+		// creates the image that represents the level
 		level = createImage(LEVEL_WIDTH, LEVEL_HEIGHT);
 		g = level.getGraphics();
 
-		// Draw black Background
+		// draw black Background
 		g.setColor(Color.BLACK);
 		g.fillRect((int) Listening.xOff + 400, (int) Listening.yOff + 300, WIDTH, HEIGHT);
 
-		// Draw gray grid in background
+		// draw gray grid in background
 		Grid.render(g, this);
 
+		// draw border
 		g.setColor(Color.RED);
 		g.drawRect(1, 1, LEVEL_WIDTH - 2, LEVEL_HEIGHT - 2);
-		// g.fillRect(100, 100, 200, 200);
 
+		// draw the player
 		player.render(g);
 	}
 
 	public void render(Graphics g) {
+		// figure out what the level looks like
 		renderLevel(g);
 
+		// create the image that will be drawn on the screen
 		screen = createImage(WIDTH, HEIGHT);
 		g = screen.getGraphics();
 
-		// Draw black Background
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
-
+		// draw the level in the proper position on the image
 		g.drawImage(level, (int) -Listening.xOff - 400, (int) -Listening.yOff - 300, null);
 
-		// Draw dead zone
-		listening.render(g);
-
-		// Show position
+		// show player coordinates in the top left hand corner
 		g.setColor(Color.GREEN);
-		g.drawString((int)(Player.x) + ", " + (int)(player.y), 30, 30);
+		g.drawString((int) (Player.x) + ", " + (int) (Player.y), 30, 30);
 
-		// Actually draws to the screen
+		// actually draws the image to the screen
 		g = getGraphics();
 		g.drawImage(screen, 0, 0, null);
 		g.dispose();
