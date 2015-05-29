@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.util.Random;
 
 public class Player {
+	public static String name; 
 	public static double x, y, diameter, radius;
 	public static int minX = 0, minY = 0, maxX = 2400, maxY = 1800;
 	private static double speedBase = 50;
@@ -10,9 +11,10 @@ public class Player {
 	private static Color color;
 	private static Color[] colors;
 
-	public Player(int x, int y, int diameter) {
+	public Player(int x, int y, int diameter, String name) {
 		Player.x = x;
 		Player.y = y;
+		Player.name = name;
 		setDiameter((double) diameter);
 		setColor();
 	}
@@ -58,5 +60,16 @@ public class Player {
 	public void render(Graphics g) {
 		g.setColor(color);
 		g.fillOval((int) (x - radius), (int) (y - radius), (int) diameter, (int) diameter);
+		g.setColor(Color.BLACK);
+		g.drawString(name, (int)(x-name.length()/2*7), (int)(y-10)-1);
+		g.setColor(Color.BLACK);
+		g.drawString(name, (int)(x-name.length()/2*7), (int)(y-10)+1);
+		g.setColor(Color.BLACK);
+		g.drawString(name, (int)(x-name.length()/2*7)-1, (int)(y-10));
+		g.setColor(Color.BLACK);
+		g.drawString(name, (int)(x-name.length()/2*7)+1, (int)(y-10));
+		g.setColor(Color.WHITE);
+		g.drawString(name, (int)(x-name.length()/2*7), (int)(y-10));
+		
 	}
 }

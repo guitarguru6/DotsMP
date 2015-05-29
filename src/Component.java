@@ -41,7 +41,7 @@ public class Component extends Applet implements Runnable {
 		addMouseMotionListener(listening);
 		addMouseWheelListener(listening);
 
-		player = new Player(400, 300, 10);
+		player = new Player(400, 300, 10, "Player #1");
 
 		// Change the cursor to a set of crosshairs
 		setCursor(new Cursor(1));
