@@ -6,9 +6,9 @@ public class Grid {
 
 	public static void render(Graphics g, Component c) {
 		g.setColor(Color.GRAY);
-		for (int x = -1; x < c.WIDTH / GRID_SIZE + 1; x++) {
-			for (int y = -1; y < c.HEIGHT / GRID_SIZE + 1; y++) {
-				g.drawRect(x * GRID_SIZE - (int) Listening.xOff % GRID_SIZE, y * GRID_SIZE - (int) Listening.yOff % GRID_SIZE, GRID_SIZE, GRID_SIZE);
+		for (int x = 0; x < Component.LEVEL_WIDTH / GRID_SIZE + 1; x++) {
+			for (int y = 0; y < Component.LEVEL_HEIGHT / GRID_SIZE + 1; y++) {
+				g.drawRect(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
 			}
 		}
 	}

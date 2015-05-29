@@ -9,6 +9,8 @@ public class Component extends Applet implements Runnable {
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
+	public static final int LEVEL_WIDTH = WIDTH * 3;
+	public static final int LEVEL_HEIGHT = HEIGHT * 3;
 
 	private static boolean isRunning = false;
 
@@ -17,7 +19,7 @@ public class Component extends Applet implements Runnable {
 	private static Image screen;
 
 	private static Listening listening;
-	
+
 	private Player player;
 
 	public static Window w;
@@ -38,7 +40,7 @@ public class Component extends Applet implements Runnable {
 		addMouseListener(listening);
 		addMouseMotionListener(listening);
 		addMouseWheelListener(listening);
-		
+
 		player = new Player(400, 300, 10);
 
 		// Change the cursor to a set of crosshairs
@@ -65,21 +67,24 @@ public class Component extends Applet implements Runnable {
 	public void tick() {
 		listening.tick();
 		player.tick();
-		
+
 	}
 
 	public void renderLevel(Graphics g) {
-		level = createImage(WIDTH * 3, HEIGHT * 3);
+		level = createImage(LEVEL_WIDTH, LEVEL_HEIGHT);
 		g = level.getGraphics();
 
 		// Draw black Background
 		g.setColor(Color.BLACK);
 		g.fillRect((int) Listening.xOff + 400, (int) Listening.yOff + 300, WIDTH, HEIGHT);
 
+		// Draw gray grid in background
+		Grid.render(g, this);
+
 		g.setColor(Color.RED);
-		g.drawRect(1, 1, level.getWidth(null)-2, level.getHeight(null)-3);
-		g.fillRect(100, 100, 200, 200);
-		
+		g.drawRect(1, 1, LEVEL_WIDTH - 2, LEVEL_HEIGHT - 2);
+		// g.fillRect(100, 100, 200, 200);
+
 		player.render(g);
 	}
 
@@ -94,9 +99,6 @@ public class Component extends Applet implements Runnable {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		g.drawImage(level, (int) -Listening.xOff - 400, (int) -Listening.yOff - 300, null);
-
-		// Draw gray grid in background
-		Grid.render(g, this);
 
 		// Draw dead zone
 		listening.render(g);

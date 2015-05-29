@@ -5,7 +5,7 @@ public class Window extends JFrame {
 
 	public Window(int width, int height, String title) {
 		setTitle(title);
-		setSize(width + 6, height + 26);
+		setSize(width + 6, height + 28);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
