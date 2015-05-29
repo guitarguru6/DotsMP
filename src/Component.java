@@ -25,7 +25,7 @@ public class Component extends Applet implements Runnable {
 	public static void main(String[] args) {
 		Component component = new Component();
 
-		w = new Window(WIDTH, HEIGHT, "DotsMP Pre-alpha v0.0.3");
+		w = new Window(WIDTH, HEIGHT, "DotsMP Pre-alpha v0.1.5");
 		w.add(component);
 
 		component.init();
@@ -65,6 +65,7 @@ public class Component extends Applet implements Runnable {
 	public void tick() {
 		listening.tick();
 		player.tick();
+		
 	}
 
 	public void renderLevel(Graphics g) {

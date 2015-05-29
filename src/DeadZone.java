@@ -20,6 +20,13 @@ public class DeadZone extends Rectangle {
 		color = Color.GREEN;
 	}
 	
+	public void tick() {
+		width = (int) Player.diameter;
+		height = (int) Player.diameter;
+		x = (int) (Player.x - Listening.xOff) - 400 - (width/2);
+		y = (int) (Player.y - Listening.yOff) - 300 - (height/2);
+	}
+	
 	public void render(Graphics g) {
 		g.setColor(color);
 		g.drawRect(x, y, width, height);

@@ -112,6 +112,7 @@ public class Listening implements MouseListener, MouseMotionListener, MouseWheel
 		if (yOff > maxY) {
 			yOff = maxY;
 		}
+		dz.tick();
 	}
 
 	public void render(Graphics g) {
