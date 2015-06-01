@@ -4,6 +4,8 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import javax.swing.JOptionPane;
+
 public class Component extends Applet implements Runnable {
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +34,7 @@ public class Component extends Applet implements Runnable {
 
 		w = new Window(WIDTH, HEIGHT, "DotsMP Pre-alpha v0.2");
 		w.add(component);
-
+		
 		component.init();
 	}
 
@@ -43,9 +45,9 @@ public class Component extends Applet implements Runnable {
 		addMouseListener(listening);
 		addMouseMotionListener(listening);
 		addMouseWheelListener(listening);
-
+		
 		// create the player
-		player = new Player(400, 300, 20, "Player #1");
+		player = new Player(400, 300, 20, JOptionPane.showInputDialog(w, "Please enter a name", "Player"));
 
 		// change the cursor to a set of crosshairs
 		setCursor(new Cursor(1));
