@@ -1,4 +1,8 @@
 package game.game;
+
+import game.net.GameClient;
+import game.net.GameServer;
+
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -28,6 +32,10 @@ public class Component extends Applet implements Runnable {
 
 	private Player player;
 
+	// client and server for networking
+	private GameClient socketClient;
+	private GameServer socketServer;
+
 	public static Window w;
 
 	public static void main(String[] args) {
@@ -35,7 +43,7 @@ public class Component extends Applet implements Runnable {
 
 		w = new Window(WIDTH, HEIGHT, "DotsMP Pre-alpha v0.2");
 		w.add(component);
-		
+
 		component.init();
 	}
 
@@ -46,11 +54,21 @@ public class Component extends Applet implements Runnable {
 		addMouseListener(listening);
 		addMouseMotionListener(listening);
 		addMouseWheelListener(listening);
-		
+
+		// create server if user confirms
+		if (JOptionPane.showConfirmDialog(this, "Do you want to run the server?") == 0) {
+			socketServer = new GameServer(this);
+			socketServer.start();
+		}
+
+		// instantiate socketClient
+		socketClient = new GameClient(this, "localhost");
+		socketClient.start();
+
 		// create the player
 		player = new Player(400, 300, 20, JOptionPane.showInputDialog(w, "Please enter a name", "Player"));
 
-		// change the cursor to a set of crosshairs
+		// change the cursor to a set of cross hairs
 		setCursor(new Cursor(1));
 
 		// start the game thread
@@ -61,6 +79,7 @@ public class Component extends Applet implements Runnable {
 	public void run() {
 		// while running: tick, render, then attempt to sleep the thread for 10
 		// milliseconds
+		socketClient.sendData("ping".getBytes());
 		while (isRunning) {
 			tick();
 			render(g);
@@ -70,7 +89,6 @@ public class Component extends Applet implements Runnable {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	public void tick() {
